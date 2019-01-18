@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>RevStackCore.Extensions.SQL</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>S. Francis</Authors>
+    <Description></Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>Net Standard 2.0 release</PackageReleaseNotes>
+    <Copyright>Copyright 2019</Copyright>
+    <PackageTags>RevStackCore SQL IQueryable</PackageTags>	
+  </PropertyGroup>
+
+  
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enum\" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+</Project>

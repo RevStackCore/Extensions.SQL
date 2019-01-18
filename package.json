@@ -1,0 +1,19 @@
+{
+  "name": "RevStackCore.Extensions.SQL",
+  "version": "1.0.0",
+  "description": "IQueryable Find extension method on the IDBConnection object",
+  "main": "RevStackCore.Extensions.SQL.sln",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RevStackCore/Extensions.SQL.git"
+  },
+  "author": "S. Francis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RevStackCore/Extensions.SQL/issues"
+  },
+  "homepage": "https://github.com/RevStackCore/Extensions.SQL"
+}
