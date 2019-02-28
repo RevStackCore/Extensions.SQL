@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>RevStackCore.Extensions.SQL</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <Authors>S. Francis</Authors>
     <Description></Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -17,10 +17,15 @@
 
   
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.50.5" />
+    <PackageReference Include="Dapper" Version="1.50.7" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
+    <PackageReference Include="RevStackCore.DataAnnotations" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enum\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Model\" />
+    <Folder Include="Utility\" />
   </ItemGroup>
 </Project>
