@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>RevStackCore.Extensions.SQL</PackageId>
-    <PackageVersion>1.2.1</PackageVersion>
-    <Authors>S. Francis</Authors>
+    <PackageVersion>1.2.2</PackageVersion>
+    <Authors>S. Francis, David Sheets</Authors>
     <Description>IQueryable Find extension method on the IDBConnection object and other stuff</Description>
     <PackageReleaseNotes>Net Standard 2.0 release</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/RevStackCore/Extensions.SQL.git</PackageProjectUrl>
@@ -19,7 +19,7 @@
     <PackageReference Include="Dapper" Version="1.50.7" />
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
-    <PackageReference Include="RevStackCore.DataAnnotations" Version="1.0.2" />
+    <PackageReference Include="RevStackCore.DataAnnotations" Version="1.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enum\" />

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using RevStackCore.DataAnnotations.DataAnnotations;
+using RevStackCore.DataAnnotations;
 
 namespace RevStackCore.Extensions.SQL
 {

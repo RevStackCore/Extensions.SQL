@@ -1,6 +1,6 @@
 {
   "name": "RevStackCore.Extensions.SQL",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "IQueryable Find extension method on the IDBConnection object and other stuff",
   "main": "RevStackCore.Extensions.SQL.sln",
   "scripts": {
