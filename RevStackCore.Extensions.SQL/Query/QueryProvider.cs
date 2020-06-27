@@ -10,9 +10,16 @@ namespace RevStackCore.Extensions.SQL
     public abstract class QueryProvider : IQueryProvider
     {
         private readonly SQLLanguageType _languageTpe;
+        private readonly string _entityType;
         protected QueryProvider(SQLLanguageType languageType)
         {
             _languageTpe = languageType;
+        }
+
+        protected QueryProvider(SQLLanguageType languageType, string type)
+        {
+            _languageTpe = languageType;
+            _entityType = type;
         }
 
         IQueryable<T> IQueryProvider.CreateQuery<T>(Expression expression)
@@ -52,7 +59,14 @@ namespace RevStackCore.Extensions.SQL
 
         protected string Translate(Expression expression)
         {
-            return new QueryTranslator(_languageTpe).Translate(expression).CommandText;  
+            if (!string.IsNullOrEmpty(_entityType))
+            {
+                return new QueryTranslator(_languageTpe, _entityType).Translate(expression).CommandText;
+            }
+            else
+            {
+                return new QueryTranslator(_languageTpe).Translate(expression).CommandText;
+            }
         }
 
         public abstract object Execute(Expression expression);

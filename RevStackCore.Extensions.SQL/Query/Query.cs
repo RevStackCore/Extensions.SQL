@@ -12,10 +12,21 @@ namespace RevStackCore.Extensions.SQL
     {
         IQueryProvider provider;
         Expression expression;
-
+        private string _type;
         public Query(IQueryProvider provider)
             : this(provider, null)
         {
+        }
+
+        public Query(IQueryProvider provider, string type, bool sigFiller)
+        {
+            if (provider == null)
+            {
+                throw new ArgumentNullException("Provider");
+            }
+            _type = type;
+            this.provider = provider;
+            this.expression = Expression.Constant(this);
         }
 
         public Query(IQueryProvider provider, Type staticType)
@@ -57,6 +68,21 @@ namespace RevStackCore.Extensions.SQL
             get { return typeof(T); }
         }
 
+        public string Type
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(_type))
+                {
+                    return _type;
+                }
+                else
+                {
+                    return typeof(T).Name;
+                }
+            }
+        }
+
         public IQueryProvider Provider
         {
             get { return this.provider; }
@@ -79,10 +105,15 @@ namespace RevStackCore.Extensions.SQL
 
         public override string ToString()
         {
+            string type = typeof(T).Name;
+            if (!string.IsNullOrEmpty(_type))
+            {
+                type = _type;
+            }
             if (this.expression.NodeType == ExpressionType.Constant &&
                 ((ConstantExpression)this.expression).Value == this)
             {
-                return "Query(" + typeof(T) + ")";
+                return "Query(" + type + ")";
             }
             else
             {

@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>RevStackCore.Extensions.SQL</PackageId>
-    <PackageVersion>1.1.0</PackageVersion>
+    <PackageVersion>1.2.0</PackageVersion>
     <Authors>S. Francis</Authors>
-    <Description></Description>
+    <Description>IQueryable Find extension method on the IDBConnection object and other stuff</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>Net Standard 2.0 release</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/RevStackCore/Extensions.SQL.git</PackageProjectUrl>

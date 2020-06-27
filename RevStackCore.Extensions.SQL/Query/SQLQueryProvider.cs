@@ -14,6 +14,11 @@ namespace RevStackCore.Extensions.SQL
             _connection = connection;
         }
 
+        public SQLQueryProvider(IDbConnection connection, SQLLanguageType languageType, string entityType) : base(languageType, entityType)
+        {
+            _connection = connection;
+        }
+
         public override object Execute(Expression expression)
         {
             string resultSql = Translate(expression);

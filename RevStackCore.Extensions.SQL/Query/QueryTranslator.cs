@@ -13,11 +13,18 @@ namespace RevStackCore.Extensions.SQL
         ParameterExpression row;
         ColumnProjection projection;
         SQLLanguageType _languageType;
+        string _type;
         internal QueryTranslator(SQLLanguageType languageType)
         {
             _languageType = languageType;
         }
-        
+
+        internal QueryTranslator(SQLLanguageType languageType, string type)
+        {
+            _languageType = languageType;
+            _type = type;
+        }
+
         Expression root;
 
         internal TranslateResult Translate(Expression expression)
@@ -499,7 +506,14 @@ namespace RevStackCore.Extensions.SQL
             if (q != null)
             {
                 sb.Append("SELECT * FROM ");
-                sb.Append(q.ElementType.Name);
+                if (!string.IsNullOrEmpty(_type))
+                {
+                    sb.Append(_type);
+                }
+                else
+                {
+                    sb.Append(q.ElementType.Name);
+                }
             }
             else if (c.Value == null)
             {
