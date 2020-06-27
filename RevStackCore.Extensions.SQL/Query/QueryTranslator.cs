@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using RevStackCore.DataAnnotations.DataAnnotations;
 
 namespace RevStackCore.Extensions.SQL
 {
@@ -547,7 +548,25 @@ namespace RevStackCore.Extensions.SQL
             if (m.Expression != null && m.Expression.NodeType == ExpressionType.Parameter)
             {
                 //camel case all properties
-                sb.Append(ToCamelCase(m.Member.Name));
+                //sb.Append(ToCamelCase(m.Member.Name));
+
+                try
+                {
+                    var columnAttribute = m.Member.GetCustomAttribute<ColumnAttribute>(true);
+                    if (columnAttribute != null && !string.IsNullOrEmpty(columnAttribute.Name))
+                    {
+                        sb.Append(columnAttribute.Name);
+                    }
+                    else
+                    {
+                        sb.Append(ToCamelCase(m.Member.Name));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    sb.Append(ToCamelCase(m.Member.Name));
+                }
+                
                 return m;
             } //there must be a better way...
             else if (m.Expression != null && m.Expression.NodeType == ExpressionType.Constant || m.Expression.NodeType == ExpressionType.MemberAccess)
