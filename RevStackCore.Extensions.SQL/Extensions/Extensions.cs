@@ -25,5 +25,33 @@ namespace RevStackCore.Extensions.SQL
                 return new Query<TEntity>(queryProvider).Where(predicate);
             }
         }
+
+        public static string ToPropertyName(this PropertyInfo property)
+        {
+            var columnAttribute = property.GetCustomAttribute<ColumnAttribute>(false);
+            if (columnAttribute != null && !string.IsNullOrEmpty(columnAttribute.Name))
+            {
+                return columnAttribute.Name;
+            }
+            else
+            {
+                return property.Name;
+            }
+        }
+
+        public static string ToTableName(this Type type)
+        {
+            var tableAttribute = type.GetCustomAttribute<TableAttribute>(true);
+            if (tableAttribute != null && !string.IsNullOrEmpty(tableAttribute.Name))
+            {
+                return tableAttribute.Name;
+            }
+            else
+            {
+                return type.Name;
+            }
+        }
+
+
     }
 }

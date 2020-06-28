@@ -113,7 +113,7 @@ namespace RevStackCore.Extensions.SQL
 
             if (keyProperties.Count == 0)
             {
-                var idProp = allProperties.Find(p => string.Equals(p.Name, "id", StringComparison.CurrentCultureIgnoreCase));
+                var idProp = allProperties.Find(p => string.Equals(p.ToPropertyName(), "id", StringComparison.CurrentCultureIgnoreCase));
                 var explicitKeyAttribute = idProp.GetCustomAttribute<ExplicitKeyAttribute>(false);
                 var primaryKeyAttribute = idProp.GetCustomAttribute<PrimaryKeyAttribute>(false);
                 if (idProp!=null && (explicitKeyAttribute==null && (primaryKeyAttribute==null || primaryKeyAttribute.ExplicitKey==false)))
@@ -182,7 +182,7 @@ namespace RevStackCore.Extensions.SQL
                 var key = GetSingleKey<T>(nameof(Get));
                 var name = GetTableName(type);
 
-                sql = $"select * from {name} where {key.Name} = @id";
+                sql = $"select * from {name} where {key.ToPropertyName()} = @id";
                 GetQueries[type.TypeHandle] = sql;
             }
 
@@ -202,7 +202,7 @@ namespace RevStackCore.Extensions.SQL
 
                 foreach (var property in TypePropertiesCache(type))
                 {
-                    var val = res[property.Name];
+                    var val = res[property.ToPropertyName()];
                     if (val == null) continue;
                     if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
                     {
@@ -258,7 +258,7 @@ namespace RevStackCore.Extensions.SQL
                 var obj = ProxyGenerator.GetInterfaceProxy<T>();
                 foreach (var property in TypePropertiesCache(type))
                 {
-                    var val = res[property.Name];
+                    var val = res[property.ToPropertyName()];
                     if (val == null) continue;
                     if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
                     {
@@ -363,7 +363,8 @@ namespace RevStackCore.Extensions.SQL
             for (var i = 0; i < allPropertiesExceptKeyAndComputed.Count; i++)
             {
                 var property = allPropertiesExceptKeyAndComputed[i];
-                adapter.AppendColumnName(sbColumnList, property.Name);  //fix for issue #336
+                string fieldName = property.ToPropertyName();
+                adapter.AppendColumnName(sbColumnList, fieldName);  //fix for issue #336
                 if (i < allPropertiesExceptKeyAndComputed.Count - 1)
                     sbColumnList.Append(", ");
             }
@@ -372,7 +373,8 @@ namespace RevStackCore.Extensions.SQL
             for (var i = 0; i < allPropertiesExceptKeyAndComputed.Count; i++)
             {
                 var property = allPropertiesExceptKeyAndComputed[i];
-                sbParameterList.AppendFormat("@{0}", property.Name);
+                string fieldName = property.ToPropertyName();
+                sbParameterList.AppendFormat("@{0}", fieldName);
                 if (i < allPropertiesExceptKeyAndComputed.Count - 1)
                     sbParameterList.Append(", ");
             }
@@ -451,7 +453,8 @@ namespace RevStackCore.Extensions.SQL
             for (var i = 0; i < nonIdProps.Count; i++)
             {
                 var property = nonIdProps[i];
-                adapter.AppendColumnNameEqualsValue(sb, property.Name);  //fix for issue #336
+                string fieldName = property.ToPropertyName();
+                adapter.AppendColumnNameEqualsValue(sb, fieldName);  //fix for issue #336
                 if (i < nonIdProps.Count - 1)
                     sb.Append(", ");
             }
@@ -459,7 +462,8 @@ namespace RevStackCore.Extensions.SQL
             for (var i = 0; i < keyProperties.Count; i++)
             {
                 var property = keyProperties[i];
-                adapter.AppendColumnNameEqualsValue(sb, property.Name);  //fix for issue #336
+                string fieldName = property.ToPropertyName();
+                adapter.AppendColumnNameEqualsValue(sb, fieldName);  //fix for issue #336
                 if (i < keyProperties.Count - 1)
                     sb.Append(" and ");
             }

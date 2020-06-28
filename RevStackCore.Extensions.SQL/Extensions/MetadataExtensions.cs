@@ -11,19 +11,12 @@ namespace RevStackCore.Extensions.SQL
         {
             var metadataSchema = new MetadataSqlSchema();
             var columns = new List<SqlDataColumn>();
-            metadataSchema.TableName = type.Name;
-            var tableAttribute = type.GetCustomAttribute<TableAttribute>(true);
-
-            if (tableAttribute != null && !string.IsNullOrEmpty(tableAttribute.Name))
-            {
-                metadataSchema.TableName = tableAttribute.Name;
-            }
-
+            metadataSchema.TableName = type.ToTableName();
             PropertyInfo[] properties = type.GetProperties();
             foreach (PropertyInfo property in properties)
             {
                 var column = new SqlDataColumn();
-                column.Name = property.Name;
+                column.Name = property.ToPropertyName();
                 column.Type = property.PropertyType;
                 var autoIdAttribute = property.GetCustomAttribute<AutoIdAttribute>(false);
                 var autoIncrementAttribute = property.GetCustomAttribute<AutoIncrementAttribute>(false);

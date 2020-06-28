@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>RevStackCore.Extensions.SQL</PackageId>
-    <PackageVersion>1.2.2</PackageVersion>
+    <PackageVersion>1.2.3</PackageVersion>
     <Authors>S. Francis, David Sheets</Authors>
     <Description>IQueryable Find extension method on the IDBConnection object and other stuff</Description>
     <PackageReleaseNotes>Net Standard 2.0 release</PackageReleaseNotes>
